@@ -1458,4 +1458,11 @@
       }
     ]
   }
+  ,{
+    "name": "Analytics",
+    "settings": [
+      {"type": "text", "id": "google_analytics_id", "label": "Google Analytics ID"},
+      {"type": "text", "id": "facebook_pixel_id", "label": "Facebook Pixel ID"}
+    ]
+  }
 ]

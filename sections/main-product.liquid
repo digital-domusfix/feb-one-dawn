@@ -52,19 +52,14 @@
   {%- if request.design_mode -%}
     <script src="{{ 'theme-editor.js' | asset_url }}" defer="defer"></script>
   {%- endif -%}
-
-  {%- assign filtered_media = product.media | where: 'media_type', 'image' -%}
-  {%- if section.settings.show_video_media -%}
-    {%- assign filtered_media = filtered_media
-      | concat: product.media | where: 'media_type', 'video'
-      | concat: product.media | where: 'media_type', 'external_video'
-    -%}
-  {%- endif -%}
-  {%- if section.settings.show_model_media -%}
-    {%- assign filtered_media = filtered_media
-      | concat: product.media | where: 'media_type', 'model'
-    -%}
-  {%- endif -%}
+  {%- assign filtered_media = '' | split: ',' -%}
+  {%- for m in product.media -%}
+    {%- if (m.media_type == 'model' and section.settings.show_model_media == false)
+      or ((m.media_type == 'video' or m.media_type == 'external_video') and section.settings.show_video_media == false) -%}
+      {%- continue -%}
+    {%- endif -%}
+    {%- assign filtered_media = filtered_media | push: m -%}
+  {%- endfor -%}
   {%- assign first_3d_model = filtered_media | where: 'media_type', 'model' | first -%}
   {%- if first_3d_model -%}
     {{ 'component-product-model.css' | asset_url | stylesheet_tag }}

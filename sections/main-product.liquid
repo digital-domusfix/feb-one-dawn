@@ -53,7 +53,19 @@
     <script src="{{ 'theme-editor.js' | asset_url }}" defer="defer"></script>
   {%- endif -%}
 
-  {%- assign first_3d_model = product.media | where: 'media_type', 'model' | first -%}
+  {%- assign filtered_media = product.media | where: 'media_type', 'image' -%}
+  {%- if section.settings.show_video_media -%}
+    {%- assign filtered_media = filtered_media
+      | concat: product.media | where: 'media_type', 'video'
+      | concat: product.media | where: 'media_type', 'external_video'
+    -%}
+  {%- endif -%}
+  {%- if section.settings.show_model_media -%}
+    {%- assign filtered_media = filtered_media
+      | concat: product.media | where: 'media_type', 'model'
+    -%}
+  {%- endif -%}
+  {%- assign first_3d_model = filtered_media | where: 'media_type', 'model' | first -%}
   {%- if first_3d_model -%}
     {{ 'component-product-model.css' | asset_url | stylesheet_tag }}
     <link
@@ -74,9 +86,9 @@
 
   {% assign variant_images = product.images | where: 'attached_to_variant?', true | map: 'src' %}
   <div class="page-width">
-    <div class="product product--{{ section.settings.media_size }} product--{{ section.settings.media_position }} product--{{ section.settings.gallery_layout }} product--mobile-{{ section.settings.mobile_thumbnails }} grid grid--1-col {% if product.media.size > 0 %}grid--2-col-tablet{% else %}product--no-media{% endif %}">
+    <div class="product product--{{ section.settings.media_size }} product--{{ section.settings.media_position }} product--{{ section.settings.gallery_layout }} product--mobile-{{ section.settings.mobile_thumbnails }} grid grid--1-col {% if filtered_media.size > 0 %}grid--2-col-tablet{% else %}product--no-media{% endif %}">
       <div class="grid__item product__media-wrapper">
-        {% render 'product-media-gallery', variant_images: variant_images %}
+        {% render 'product-media-gallery', media: filtered_media, variant_images: variant_images %}
       </div>
       <div class="product__info-wrapper grid__item{% if settings.page_width > 1400 and section.settings.media_size == "small" %} product__info-wrapper--extra-padding{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
         <section
@@ -684,7 +696,7 @@
       </div>
     </div>
 
-    {% render 'product-media-modal', variant_images: variant_images %}
+    {% render 'product-media-modal', media: filtered_media, variant_images: variant_images %}
 
     {% assign popups = section.blocks | where: 'type', 'popup' %}
     {%- for block in popups -%}
@@ -712,14 +724,14 @@
       </modal-dialog>
     {%- endfor -%}
 
-    {%- if product.media.size > 0 -%}
+    {%- if filtered_media.size > 0 -%}
       <script src="{{ 'product-modal.js' | asset_url }}" defer="defer"></script>
       <script src="{{ 'media-gallery.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
 
     {%- if first_3d_model -%}
       <script type="application/json" id="ProductJSON-{{ product.id }}">
-        {{ product.media | where: 'media_type', 'model' | json }}
+        {{ filtered_media | where: 'media_type', 'model' | json }}
       </script>
       <script src="{{ 'product-model.js' | asset_url }}" defer></script>
     {%- endif -%}
@@ -2238,6 +2250,18 @@
       "id": "enable_video_looping",
       "default": false,
       "label": "t:sections.main-product.settings.enable_video_looping.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_video_media",
+      "default": true,
+      "label": "Show product videos"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_model_media",
+      "default": true,
+      "label": "Show 3D/360° media"
     },
     {
       "type": "header",

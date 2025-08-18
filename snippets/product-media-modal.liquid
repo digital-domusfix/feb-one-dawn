@@ -4,6 +4,7 @@
   Accepts:
   - product: {Object} Product liquid object
   - variant_images: {Array} Product images associated with a variant
+  - media: {Array} (optional) Product media array to render
 
   Usage:
   {% render 'product-media-modal' %}
@@ -33,22 +34,23 @@
       tabindex="0"
     >
       {%- liquid
-        if product.selected_or_first_available_variant.featured_media != null
-          assign media = product.selected_or_first_available_variant.featured_media
-          render 'product-media', media: media, loop: section.settings.enable_video_looping, variant_image: section.settings.hide_variants
+        assign medias = media | default: product.media
+        assign featured_media = product.selected_or_first_available_variant.featured_media
+        if featured_media and medias contains featured_media
+          render 'product-media', media: featured_media, loop: section.settings.enable_video_looping, variant_image: section.settings.hide_variants
         endif
       -%}
 
-      {%- for media in product.media -%}
+      {%- for media_item in medias -%}
         {%- liquid
-          if section.settings.hide_variants and variant_images contains media.src or variant_images contains media.id
+          if section.settings.hide_variants and variant_images contains media_item.src or variant_images contains media_item.id
             assign variant_image = true
           else
             assign variant_image = false
           endif
 
-          unless media.id == product.selected_or_first_available_variant.featured_media.id
-            render 'product-media', media: media, loop: section.settings.enable_video_looping, variant_image: variant_image
+          unless featured_media and media_item.id == featured_media.id
+            render 'product-media', media: media_item, loop: section.settings.enable_video_looping, variant_image: variant_image
           endunless
         -%}
       {%- endfor -%}

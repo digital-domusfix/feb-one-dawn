@@ -45,36 +45,36 @@
         "collapsible-row-0": {
           "type": "collapsible_tab",
           "settings": {
-            "heading": "Materials",
+            "heading": "Fabric",
             "icon": "leather",
-            "content": "",
+            "content": "<p>Information about fabric composition and feel.<\/p>",
             "page": ""
           }
         },
         "collapsible-row-1": {
           "type": "collapsible_tab",
           "settings": {
-            "heading": "Shipping & Returns",
-            "icon": "truck",
-            "content": "",
+            "heading": "Care Instructions",
+            "icon": "heart",
+            "content": "<p>Guidance on caring for this product.<\/p>",
             "page": ""
           }
         },
         "collapsible-row-2": {
           "type": "collapsible_tab",
           "settings": {
-            "heading": "Dimensions",
-            "icon": "ruler",
-            "content": "",
+            "heading": "Shipping",
+            "icon": "truck",
+            "content": "<p>Details on shipping options and times.<\/p>",
             "page": ""
           }
         },
         "collapsible-row-3": {
           "type": "collapsible_tab",
           "settings": {
-            "heading": "Care Instructions",
-            "icon": "heart",
-            "content": "",
+            "heading": "Returns",
+            "icon": "return",
+            "content": "<p>Our return policy for this item.<\/p>",
             "page": ""
           }
         },
@@ -193,7 +193,7 @@
     "related-products": {
       "type": "related-products",
       "settings": {
-        "heading": "You may also like",
+        "heading": "You might also like",
         "heading_size": "h2",
         "columns_desktop": 4,
         "color_scheme": "scheme-1",

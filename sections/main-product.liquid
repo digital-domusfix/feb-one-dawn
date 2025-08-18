@@ -128,6 +128,9 @@
                     </h2>
                   </a>
                 </div>
+                <div class="product__review-badge">
+                  <span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span>
+                </div>
               {%- when 'price' -%}
                 <div id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
                   {%- render 'price',
@@ -731,13 +734,35 @@
             <h1 class="h2">{{ block.settings.page.title | escape }}</h1>
             {{ block.settings.page.content }}
           </div>
-        </div>
-      </modal-dialog>
-    {%- endfor -%}
+      </div>
+    </modal-dialog>
+  {%- endfor -%}
 
-    {%- if filtered_media.size > 0 -%}
-      <script src="{{ 'product-modal.js' | asset_url }}" defer="defer"></script>
-      <script src="{{ 'media-gallery.js' | asset_url }}" defer="defer"></script>
+  {%- assign has_purchased = false -%}
+  {%- if customer -%}
+    {%- for order in customer.orders -%}
+      {%- for item in order.line_items -%}
+        {%- if item.product_id == product.id -%}
+          {%- assign has_purchased = true -%}
+          {%- break -%}
+        {%- endif -%}
+      {%- endfor -%}
+      {%- if has_purchased -%}{%- break -%}{%- endif -%}
+    {%- endfor -%}
+  {%- endif -%}
+  <div class="product-reviews-form">
+    {%- if customer and has_purchased -%}
+      <div id="shopify-product-reviews" data-id="{{ product.id }}"></div>
+    {%- elsif customer -%}
+      <p>You must purchase this product before leaving a review.</p>
+    {%- else -%}
+      <p><a href="/account/login">Log in</a> to leave a review.</p>
+    {%- endif -%}
+  </div>
+
+  {%- if filtered_media.size > 0 -%}
+    <script src="{{ 'product-modal.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'media-gallery.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
 
     {%- if first_3d_model -%}

@@ -47,6 +47,14 @@
     flex-wrap: wrap;
   }
 
+  .gap-x-6 {
+    column-gap: 2.4rem;
+  }
+
+  .header__icons {
+    align-items: center;
+  }
+
   summary.list-menu__item {
     padding-right: 2.7rem;
   }
@@ -77,8 +85,16 @@
     padding: {{ section.settings.padding_top | times: 0.5 | round: 0 }}px 3rem {{ section.settings.padding_bottom | times: 0.5 | round: 0 }}px 3rem;
   }
 
+  .header-wrapper,
+  .header {
+    height: 100%;
+  }
+
   .section-header {
     position: sticky; /* This is for fixing a Safari z-index issue. PR #2147 */
+    top: 0;
+    z-index: 40;
+    height: 6.4rem;
     margin-bottom: {{ section.settings.margin_bottom | times: 0.75 | round: 0 }}px;
   }
 
@@ -92,6 +108,9 @@
     .header {
       padding-top: {{ section.settings.padding_top }}px;
       padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+    .section-header {
+      height: 8rem;
     }
   }
 {%- endstyle -%}
@@ -165,7 +184,7 @@
     {%- endif -%}
 
     <nav class="header__inline-menu">
-      <ul class="list-menu list-menu--inline" role="list">
+      <ul class="list-menu list-menu--inline gap-x-6" role="list">
         <li class="list-menu__item">
           <a href="{{ routes.all_products_collection_url }}" class="list-menu__item--link link">Shop</a>
         </li>

@@ -499,6 +499,7 @@
                 {% liquid
                   assign share_url = product.selected_variant.url | default: product.url | prepend: request.origin
                   render 'share-button', block: block, share_link: share_url
+                  render 'social-sharing', share_url: share_url, product: product
                 %}
 
               {%- when 'variant_picker' -%}

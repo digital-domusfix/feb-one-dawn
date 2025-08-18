@@ -1,0 +1,20 @@
+{% comment %}
+  Renders social sharing icons for product pages.
+  Accepts:
+  - share_url: {String} The URL to share.
+  - product: {Product} The product object (optional).
+{% endcomment %}
+<div class="social-sharing">
+  <a class="social-sharing__link" target="_blank" rel="noopener" href="https://www.facebook.com/sharer/sharer.php?u={{ share_url | url_encode }}">
+    <span class="svg-wrapper">{{ 'icon-facebook.svg' | inline_asset_content }}</span>
+    <span class="visually-hidden">{{ 'general.social.links.facebook' | t }}</span>
+  </a>
+  <a class="social-sharing__link" target="_blank" rel="noopener" href="https://www.instagram.com/?url={{ share_url | url_encode }}">
+    <span class="svg-wrapper">{{ 'icon-instagram.svg' | inline_asset_content }}</span>
+    <span class="visually-hidden">{{ 'general.social.links.instagram' | t }}</span>
+  </a>
+  <a class="social-sharing__link" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/button/?url={{ share_url | url_encode }}{% if product.featured_media %}&media={{ product.featured_media | image_url }}{% endif %}&description={{ product.title | escape }}">
+    <span class="svg-wrapper">{{ 'icon-pinterest.svg' | inline_asset_content }}</span>
+    <span class="visually-hidden">{{ 'general.social.links.pinterest' | t }}</span>
+  </a>
+</div>

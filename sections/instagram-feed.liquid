@@ -1,0 +1,39 @@
+{% comment %}
+  Section for displaying Instagram feed on the homepage using Instafeed or similar app.
+  Merchants can provide an access token to connect their feed.
+{% endcomment %}
+<div class="instagram-feed" id="InstagramFeed-{{ section.id }}">
+  {% if section.settings.access_token != blank %}
+    <script src="https://cdn.jsdelivr.net/npm/instafeed.js" defer="defer"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        var feed = new Instafeed({
+          accessToken: '{{ section.settings.access_token }}',
+          target: 'InstagramFeed-{{ section.id }}'
+        });
+        feed.run();
+      });
+    </script>
+  {% else %}
+    <p>Instagram feed</p>
+  {% endif %}
+</div>
+
+{% schema %}
+{
+  "name": "Instagram feed",
+  "settings": [
+    {
+      "type": "text",
+      "id": "access_token",
+      "label": "Access token",
+      "info": "Add your Instagram access token to load the feed"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Instagram feed"
+    }
+  ]
+}
+{% endschema %}

@@ -111,6 +111,17 @@
               {%- when 'title' -%}
                 <div class="product__title" {{ block.shopify_attributes }}>
                   <h1>{{ product.title | escape }}</h1>
+                  <button
+                    class="wishlist-toggle"
+                    data-product-id="{{ product.id }}"
+                    data-product-handle="{{ product.handle }}"
+                    data-product-title="{{ product.title | escape }}"
+                    data-product-image="{{ product.featured_media | image_url: width: 200 }}"
+                    aria-pressed="false"
+                    aria-label="Add to wishlist"
+                  >
+                    {% render 'icon-heart' %}
+                  </button>
                   <a href="{{ product.url }}" class="product__title">
                     <h2 class="h1">
                       {{ product.title | escape }}

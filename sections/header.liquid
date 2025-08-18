@@ -132,10 +132,6 @@
       if section.settings.menu != blank
         render 'header-drawer'
       endif
-
-      if section.settings.logo_position == 'top-center' or section.settings.menu == blank
-        render 'header-search', input_id: 'Search-In-Modal-1'
-      endif
     -%}
 
     {%- if section.settings.logo_position != 'middle-center' -%}
@@ -168,15 +164,22 @@
       {%- endif -%}
     {%- endif -%}
 
-    {%- liquid
-      if section.settings.menu != blank
-        if section.settings.menu_type_desktop == 'dropdown'
-          render 'header-dropdown-menu'
-        elsif section.settings.menu_type_desktop != 'drawer'
-          render 'header-mega-menu'
-        endif
-      endif
-    %}
+    <nav class="header__inline-menu">
+      <ul class="list-menu list-menu--inline" role="list">
+        <li class="list-menu__item">
+          <a href="{{ routes.all_products_collection_url }}" class="list-menu__item--link link">Shop</a>
+        </li>
+        <li class="list-menu__item">
+          <a href="/pages/about" class="list-menu__item--link link">About</a>
+        </li>
+        <li class="list-menu__item">
+          <a href="/pages/contact" class="list-menu__item--link link">Contact</a>
+        </li>
+        <li class="list-menu__item">
+          <a href="{{ routes.account_url }}" class="list-menu__item--link link">Account</a>
+        </li>
+      </ul>
+    </nav>
 
     {%- if section.settings.logo_position == 'middle-center' -%}
       {%- if request.page_type == 'index' -%}
@@ -232,7 +235,35 @@
           </localization-form>
         {%- endif -%}
       </div>
-      {% render 'header-search', input_id: 'Search-In-Modal' %}
+      <form action="{{ routes.search_url }}" method="get" role="search" class="search header__search-bar">
+        <div class="field">
+          <input
+            class="search__input field__input"
+            type="search"
+            name="q"
+            value="{{ search.terms | escape }}"
+            placeholder="{{ 'general.search.search' | t }}"
+            {%- if settings.predictive_search_enabled -%}
+              role="combobox"
+              aria-expanded="false"
+              aria-owns="predictive-search-results"
+              aria-controls="predictive-search-results"
+              aria-haspopup="listbox"
+              aria-autocomplete="list"
+              autocorrect="off"
+              autocomplete="off"
+              autocapitalize="off"
+              spellcheck="false"
+            {%- endif -%}
+          >
+          <input type="hidden" name="options[prefix]" value="last">
+          <button class="search__button field__button" aria-label="{{ 'general.search.search' | t }}">
+            <span class="svg-wrapper">
+              {{- 'icon-search.svg' | inline_asset_content -}}
+            </span>
+          </button>
+        </div>
+      </form>
 
       {%- if shop.customer_accounts_enabled -%}
         <a

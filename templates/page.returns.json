@@ -19,7 +19,7 @@
         "text": {
           "type": "text",
           "settings": {
-            "text": "Add your content here."
+            "text": "<p>Add your content here.</p>"
           }
         }
       },
@@ -44,7 +44,7 @@
         "text": {
           "type": "text",
           "settings": {
-            "text": "Tell your story here."
+            "text": "<p>Tell your story here.</p>"
           }
         }
       },

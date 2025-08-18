@@ -31,7 +31,7 @@
 {% endstyle %}
 
 {% liquid
-  assign widths = '375, 550, 750, 1100, 1500, 1780, 2000, 3000, 3840'
+    assign widths = '375, 550, 750, 1100, 1500, 1780, 2000, 3000, 3840' | split: ', '
   assign fetch_priority = 'auto'
   assign loading = 'lazy'
   if section.index == 1
@@ -51,14 +51,14 @@
       <picture>
         {% if mobile_image != blank %}
           {% capture mobile_srcset %}
-            {%- for width in widths | split: ', ' -%}
+              {%- for width in widths -%}
               {{ mobile_image | image_url: width: width }} {{ width }}w{% unless forloop.last %}, {% endunless %}
             {%- endfor -%}
           {% endcapture %}
           <source srcset="{{ mobile_srcset }}" media="(max-width: 749px)" sizes="100vw">
         {% endif %}
         {% capture desktop_srcset %}
-          {%- for width in widths | split: ', ' -%}
+            {%- for width in widths -%}
               {{ desktop_image | image_url: width: width }} {{ width }}w{% unless forloop.last %}, {% endunless %}
           {%- endfor -%}
         {% endcapture %}

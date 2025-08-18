@@ -56,7 +56,7 @@
     {%- for m in product.media -%}
       {%- if m.media_type == 'model' and section.settings.show_model_media == false -%}
         {%- continue -%}
-      {%- elsif (m.media_type == 'video' or m.media_type == 'external_video') and section.settings.show_video_media == false -%}
+      {%- elsif section.settings.show_video_media == false and m.media_type contains 'video' -%}
         {%- continue -%}
       {%- endif -%}
         {%- assign filtered_media = filtered_media | concat: [m] -%}

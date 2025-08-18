@@ -1,1 +1,31 @@
+{%- style -%}
+  #CartDrawer .drawer__heading,
+  #CartDrawer .cart__checkout-button,
+  #CartDrawer .cart__reassurance {
+    font-family: 'Poppins', sans-serif;
+  }
+
+  #CartDrawer .drawer__heading {
+    color: #1E3A8A;
+  }
+
+  #CartDrawer .cart__checkout-button {
+    background-color: #1E3A8A;
+    color: #fff;
+    border-radius: 0;
+  }
+
+  #CartDrawer .cart__reassurance {
+    margin-top: 1rem;
+    color: #1E3A8A;
+    text-align: center;
+    font-size: 0.875rem;
+  }
+
+  #CartDrawer .cart__reassurance a {
+    color: #1E3A8A;
+    text-decoration: underline;
+  }
+{%- endstyle -%}
+
 {%- render 'cart-drawer' -%}

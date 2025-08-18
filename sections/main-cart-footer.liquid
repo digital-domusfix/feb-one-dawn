@@ -17,6 +17,20 @@
   }
 {%- endstyle -%}
 
+{%- style -%}
+  .cart__reassurance {
+    margin-top: 1rem;
+    font-family: 'Poppins', sans-serif;
+    color: #1E3A8A;
+    text-align: center;
+  }
+
+  .cart__reassurance a {
+    color: #1E3A8A;
+    text-decoration: underline;
+  }
+{%- endstyle -%}
+
 <div
   class="gradient color-{{ section.settings.color_scheme }}{% if cart == empty %} is-empty{% endif %}"
   id="main-cart-footer"
@@ -126,6 +140,12 @@
               {%- endif -%}
           {%- endcase -%}
         {% endfor %}
+        <div class="cart__reassurance">
+          <span class="cart__secure-checkout">Secure Checkout</span>
+          {%- if shop.refund_policy.url != blank -%}
+            <a href="{{ shop.refund_policy.url }}" class="cart__return-policy">Return Policy</a>
+          {%- endif -%}
+        </div>
 
         <div id="cart-errors"></div>
       </div>

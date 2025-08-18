@@ -19,6 +19,19 @@
   }
 {%- endstyle -%}
 
+{%- style -%}
+  #main-cart-items,
+  #main-cart-items th,
+  #main-cart-items td,
+  #main-cart-items .cart-item__name {
+    font-family: 'Poppins', sans-serif;
+  }
+
+  #main-cart-items .cart-item__name {
+    color: #1E3A8A;
+  }
+{%- endstyle -%}
+
 {%- unless settings.cart_type == 'drawer' -%}
   <script src="{{ 'cart.js' | asset_url }}" defer="defer"></script>
 {%- endunless -%}

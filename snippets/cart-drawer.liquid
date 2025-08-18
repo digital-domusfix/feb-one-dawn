@@ -574,6 +574,12 @@
           >
             {{ 'sections.cart.checkout' | t }}
           </button>
+          <div class="cart__reassurance">
+            <span class="cart__secure-checkout">Secure Checkout</span>
+            {%- if shop.refund_policy.url != blank -%}
+              <a href="{{ shop.refund_policy.url }}" class="cart__return-policy">Return Policy</a>
+            {%- endif -%}
+          </div>
         </div>
       </div>
     </div>

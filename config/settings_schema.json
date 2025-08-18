@@ -111,7 +111,7 @@
       {
         "type": "font_picker",
         "id": "type_header_font",
-        "default": "assistant_n4",
+        "default": "playfair_display_n7",
         "label": "t:settings_schema.typography.settings.type_header_font.label"
       },
       {
@@ -131,8 +131,14 @@
       {
         "type": "font_picker",
         "id": "type_body_font",
-        "default": "assistant_n4",
+        "default": "source_sans_n4",
         "label": "t:settings_schema.typography.settings.type_body_font.label"
+      },
+      {
+        "type": "font_picker",
+        "id": "type_body_font_secondary",
+        "default": "montserrat_n4",
+        "label": "Body secondary font"
       },
       {
         "type": "range",

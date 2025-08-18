@@ -21,7 +21,7 @@
   --image-padding: 0rem;
   flex-direction: row;
   align-items: flex-start;
-  gap: 1.5rem;
+  gap: calc(var(--spacing-base) * 1.5);
 }
 
 .card--horizontal.ratio:before {
@@ -29,7 +29,7 @@
 }
 
 .card--card.card--horizontal {
-  padding: 1.2rem;
+  padding: calc(var(--spacing-base) * 1.2);
 }
 
 .card--card.card--horizontal.card--text {
@@ -119,13 +119,13 @@
 
 .card--media .card__inner .card__content {
   position: relative;
-  padding: calc(var(--image-padding) + 1rem);
+  padding: calc(var(--image-padding) + var(--spacing-base));
 }
 
 .card__content {
   display: grid;
   grid-template-rows: minmax(0, 1fr) max-content minmax(0, 1fr);
-  padding: 1rem;
+  padding: var(--spacing-base);
   width: 100%;
   flex-grow: 1;
 }
@@ -136,7 +136,7 @@
 
 .card__information {
   grid-row-start: 2;
-  padding: 1.3rem 1rem;
+  padding: calc(var(--spacing-base) * 1.3) var(--spacing-base);
 }
 
 .card:not(.ratio) > .card__content {
@@ -144,7 +144,7 @@
 }
 
 .card-information .card__information-volume-pricing-note {
-  margin-top: 0.6rem;
+  margin-top: calc(var(--spacing-base) * 0.6);
   line-height: calc(0.5 + 0.4 / var(--font-body-scale));
   color: rgba(var(--color-foreground), 0.75);
 }
@@ -167,9 +167,9 @@
 .card__information-volume-pricing-note--button + .global-settings-popup.quantity-popover__info {
   transform: initial;
   top: auto;
-  bottom: 4rem;
-  max-width: 20rem;
-  width: calc(95% + 2rem);
+  bottom: calc(var(--spacing-base) * 4);
+  max-width: calc(var(--spacing-base) * 20);
+  width: calc(95% + calc(var(--spacing-base) * 2));
 }
 
 .card__information-volume-pricing-note--button + .global-settings-popup.quantity-popover__info span:first-of-type {
@@ -202,20 +202,20 @@
   .grid--6-col-desktop .card__information-volume-pricing-note--button + .global-settings-popup.quantity-popover__info {
     left: 50%;
     transform: translate(-50%);
-    width: calc(100% + var(--border-width) + 3.5rem);
+    width: calc(100% + var(--border-width) + calc(var(--spacing-base) * 3.5));
   }
 
   .grid--6-col-desktop
     .card--standard
     .card__information-volume-pricing-note--button
     + .global-settings-popup.quantity-popover__info {
-    width: calc(100% + var(--border-width) + 1rem);
+    width: calc(100% + var(--border-width) + var(--spacing-base));
   }
 }
 
 @media screen and (max-width: 749px) {
   .grid--2-col-tablet-down .card__content quick-add-bulk .quantity__button {
-    width: calc(3.5rem / var(--font-body-scale));
+    width: calc((var(--spacing-base) * 3.5) / var(--font-body-scale));
   }
 
   .grid--2-col-tablet-down
@@ -241,7 +241,7 @@
     .card--card
     .card__information-volume-pricing-note--button
     + .global-settings-popup.quantity-popover__info {
-    width: calc(100% + var(--border-width) + 4rem);
+    width: calc(100% + var(--border-width) + calc(var(--spacing-base) * 4));
   }
 
   .grid--2-col-tablet-down .card__content quick-add-bulk .quantity {
@@ -361,12 +361,16 @@
 }
 
 .card__heading a:focus:after {
-  box-shadow: 0 0 0 0.3rem rgb(var(--color-background)), 0 0 0.5rem 0.4rem rgba(var(--color-foreground), 0.3);
+  box-shadow:
+    0 0 0 0.3rem rgb(var(--color-background)),
+    0 0 0.5rem 0.4rem rgba(var(--color-foreground), 0.3);
   outline: 0.2rem solid rgba(var(--color-foreground), 0.5);
 }
 
 .card__heading a:focus-visible:after {
-  box-shadow: 0 0 0 0.3rem rgb(var(--color-background)), 0 0 0.5rem 0.4rem rgba(var(--color-foreground), 0.3);
+  box-shadow:
+    0 0 0 0.3rem rgb(var(--color-background)),
+    0 0 0.5rem 0.4rem rgba(var(--color-foreground), 0.3);
   outline: 0.2rem solid rgba(var(--color-foreground), 0.5);
 }
 
@@ -483,7 +487,7 @@
 }
 
 .card-information > .rating {
-  margin-top: 0.4rem;
+  margin-top: calc(var(--spacing-base) * 0.4);
 }
 
 /* Specificity needed due to the changes below */
@@ -503,7 +507,7 @@
 }
 
 .card-article-info {
-  margin-top: 1rem;
+  margin-top: var(--spacing-base);
 }
 
 /* Card Shapes */

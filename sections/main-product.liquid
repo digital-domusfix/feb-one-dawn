@@ -59,7 +59,7 @@
       {%- elsif section.settings.show_video_media == false and m.media_type contains 'video' -%}
         {%- continue -%}
       {%- endif -%}
-        {%- assign filtered_media = filtered_media | concat: [m] -%}
+        {%- assign filtered_media = filtered_media | concat: self[m] -%}
     {%- endfor -%}
     {%- assign first_3d_model = filtered_media | where: 'media_type', 'model' | first -%}
   {%- if first_3d_model -%}
@@ -2313,3 +2313,13 @@
   ]
 }
 {% endschema %}
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{%- assign filtered_media = filtered_media | concat: [m] -%}"
+  to: "{%- assign filtered_media = filtered_media | concat: self[m] -%}"
+  position: 2648..2712
+{% endcomment %}
